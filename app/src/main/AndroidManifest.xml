@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RSixSports">
         <activity
+            android:name=".AdminEditActivity"
+            android:parentActivityName=".AdminActivity" />
+        <activity
+            android:name=".AdminActivity"
+            android:label="Admin" />
+        <activity
             android:name=".HistoryActivity"
             android:label="Purchase History"
             android:parentActivityName=".MainActivity" />

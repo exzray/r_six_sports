@@ -4,6 +4,7 @@ import com.google.firebase.firestore.Exclude;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class OrderModel {
 
@@ -17,6 +18,11 @@ public class OrderModel {
     private String name = "";
     private String contact = "";
     private String address = "";
+
+    private Double order_pay = 0.0;
+    private Double order_charge = 0.0;
+
+    private Integer order_items = 0;
 
     private METHOD payment = METHOD.CASH;
     private STATUS status = STATUS.PENDING;
@@ -57,6 +63,30 @@ public class OrderModel {
         this.address = address;
     }
 
+    public Double getOrder_pay() {
+        return order_pay;
+    }
+
+    public void setOrder_pay(Double order_pay) {
+        this.order_pay = order_pay;
+    }
+
+    public Double getOrder_charge() {
+        return order_charge;
+    }
+
+    public void setOrder_charge(Double order_charge) {
+        this.order_charge = order_charge;
+    }
+
+    public Integer getOrder_items() {
+        return order_items;
+    }
+
+    public void setOrder_items(Integer order_items) {
+        this.order_items = order_items;
+    }
+
     public METHOD getPayment() {
         return payment;
     }
@@ -90,7 +120,37 @@ public class OrderModel {
     }
 
     @Exclude
+    public String getStringPay() {
+        return String.format(Locale.getDefault(), "RM %.2f", getOrder_pay());
+    }
+
+    @Exclude
+    public String getStringCharge() {
+        return String.format(Locale.getDefault(), "RM %.2f", getOrder_charge());
+    }
+
+    @Exclude
     public String getStringDelivered() {
         return DateFormat.getDateInstance(DateFormat.MEDIUM).format(getDelivered());
+    }
+
+    @Exclude
+    public String getStringCreated() {
+        return DateFormat.getDateInstance(DateFormat.MEDIUM).format(getCreated());
+    }
+
+    @Exclude
+    public String getStringMethod() {
+        return getPayment().toString();
+    }
+
+    @Exclude
+    public String getStringStatus() {
+        return getStatus().toString();
+    }
+
+    @Exclude
+    public String getStringQuantity() {
+        return String.valueOf(order_items);
     }
 }

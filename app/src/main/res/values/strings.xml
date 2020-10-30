@@ -22,4 +22,8 @@
     <string name="delivery">Include RM 5.00 for delivery charge</string>
     <string name="nice_your_order_will_be_process_soon">Nice, your order will be process soon</string>
     <string name="history">History</string>
+    <string name="call_customer">call customer</string>
+    <string name="view">view</string>
+    <string name="update_order">update order</string>
+    <string name="edit">edit</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.nomi.rsixports;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -9,7 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.SetOptions;
 import com.nomi.rsixports.databinding.ActivityRegisterBinding;
+import com.nomi.rsixports.model.ProfileModel;
+import com.nomi.rsixports.utility.Shared;
 
 import java.util.Objects;
 
@@ -56,13 +58,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void signupComplete(Task<AuthResult> authResultTask) {
         binding.buttonSignup.setEnabled(true);
+        Shared
+                .getProfileDocumentReference()
+                .set(new ProfileModel(), SetOptions.merge());
     }
 
     private void signupSuccess(AuthResult result) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-
-        finish();
+        onBackPressed();
     }
 
     private void signupFailure(Exception e) {

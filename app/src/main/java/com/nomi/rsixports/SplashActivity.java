@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +12,9 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.nomi.rsixports.databinding.ActivitySplashBinding;
+import com.nomi.rsixports.model.ProfileModel;
+import com.nomi.rsixports.utility.Helper;
+import com.nomi.rsixports.utility.Shared;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -56,11 +60,19 @@ public class SplashActivity extends AppCompatActivity {
             Handler handler = new Handler();
             handler.postDelayed(() -> {
 
-                dialog.dismiss();
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                Shared
+                        .getProfileDocumentReference()
+                        .get()
+                        .addOnSuccessListener(snapshot -> {
+                            if (snapshot == null) return;
+                            ProfileModel data = Helper.snapshotToProfile(snapshot);
 
-                startActivity(intent);
+                            if (data.getSuperuser()) startActivityAdmin();
+                            else startActivityMain();
+                        })
+                        .addOnFailureListener(e -> Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show());
+
+                dialog.dismiss();
 
             }, 2000);
         }
@@ -74,6 +86,20 @@ public class SplashActivity extends AppCompatActivity {
 
     private void startActivityRegister() {
         Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    private void startActivityMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        startActivity(intent);
+    }
+
+    private void startActivityAdmin() {
+        Intent intent = new Intent(this, AdminActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
         startActivity(intent);
     }
 }

@@ -6,6 +6,8 @@ public class ProfileModel {
     private String contact = "";
     private String address = "";
 
+    private Boolean superuser = false;
+
     public String getName() {
         return name;
     }
@@ -28,5 +30,13 @@ public class ProfileModel {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Boolean getSuperuser() {
+        return superuser;
+    }
+
+    public void setSuperuser(Boolean superuser) {
+        this.superuser = superuser;
     }
 }

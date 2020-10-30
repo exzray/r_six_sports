@@ -20,6 +20,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.nomi.rsixports.adapter.ImageAdapter;
 import com.nomi.rsixports.databinding.ActivityDetailBinding;
 import com.nomi.rsixports.model.CartModel;
+import com.nomi.rsixports.model.ConfigModel;
 import com.nomi.rsixports.model.ProductModel;
 import com.nomi.rsixports.utility.Helper;
 import com.nomi.rsixports.utility.Shared;
@@ -143,10 +144,27 @@ public class DetailActivity extends AppCompatActivity {
         new MaterialAlertDialogBuilder(this)
                 .setMessage("Do you want to open cart now?")
                 .setPositiveButton("YES", (dialog, which) -> {
-                    Intent intent = new Intent(this, OrderActivity.class);
-                    startActivity(intent);
 
-                    finish();
+                    Shared
+                            .getFirestore()
+                            .collection("store")
+                            .document("config")
+                            .get()
+                            .addOnSuccessListener(snapshot -> {
+                                if (snapshot == null) {
+                                    Toast.makeText(this, "Please try again", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+
+                                ConfigModel data = Helper.snapshotToConfig(snapshot);
+
+                                Intent intent = new Intent(this, OrderActivity.class);
+                                intent.putExtra("delivery_charge", data.getDelivery_charge());
+                                startActivity(intent);
+
+                                finish();
+                            })
+                            .addOnFailureListener(e -> Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show());
                 })
                 .setNegativeButton("NO", (dialog, which) -> {
                     dialog.dismiss();

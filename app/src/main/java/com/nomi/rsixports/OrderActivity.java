@@ -160,6 +160,10 @@ public class OrderActivity extends AppCompatActivity {
 
             String s_size = snapshots.size() + " items in cart";
             binding.textSize.setText(s_size);
+
+            order.setOrder_pay(total_price);
+            order.setOrder_charge(delivery_charge);
+            order.setOrder_items(snapshots.size());
         });
     }
 

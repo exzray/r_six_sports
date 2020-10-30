@@ -47,6 +47,7 @@ public class Shared {
 
 
     public static final String EXTRA_PRODUCT_UID = "product_uid";
+    public static final String EXTRA_ORDER_UID = "order_uid";
 
     public static final String FIELD_CATEGORY_UID = "category_uid";
 }

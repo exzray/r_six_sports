@@ -1,10 +1,9 @@
 package com.nomi.rsixports;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -53,10 +52,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void signinSuccess(AuthResult result) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-
-        finish();
+        onBackPressed();
     }
 
     private void signinFailure(Exception e) {
