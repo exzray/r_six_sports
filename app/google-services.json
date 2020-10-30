@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "966804315484",
+    "firebase_url": "https://r-six-sports.firebaseio.com",
+    "project_id": "r-six-sports",
+    "storage_bucket": "r-six-sports.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966804315484:android:2a06f8bb67c33ea59a7599",
+        "android_client_info": {
+          "package_name": "com.nomi.rsixports"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "966804315484-0rbkb3biabifr04qddbt2kkghgucmma8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8H1FhGqhG-THaMJry5PtS1bxBj58Yag0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "966804315484-0rbkb3biabifr04qddbt2kkghgucmma8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
