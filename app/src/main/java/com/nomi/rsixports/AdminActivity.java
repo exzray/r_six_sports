@@ -2,12 +2,16 @@ package com.nomi.rsixports;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.nomi.rsixports.adapter.OrderAdapter;
 import com.nomi.rsixports.databinding.ActivityAdminBinding;
@@ -27,6 +31,23 @@ public class AdminActivity extends AppCompatActivity {
 
         setContentView(binding.getRoot());
         setViewModel();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.admin_option, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_logout){
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, SplashActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setViewModel() {
